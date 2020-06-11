@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.7.4 on win32)" generated="20200525 11:26:40.993" rpa="false">
+<suite id="s1" name="Api1" source="D:\PycharmProjects\rf_auto\API_TEST\Tasks\api1.robot">
+<test id="s1-t1" name="Get Requests">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>http://ws.webxml.com.cn/WebServices</arg>
+</arguments>
+<msg timestamp="20200525 11:26:41.120" level="INFO">Creating Session using : alias=api, url=http://ws.webxml.com.cn/WebServices, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200525 11:26:41.120" endtime="20200525 11:26:41.120"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>theRegionCode=3113</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20200525 11:26:41.120" level="INFO">${params} = {'theRegionCode': '3113'}</msg>
+<status status="PASS" starttime="20200525 11:26:41.120" endtime="20200525 11:26:41.120"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>/WeatherWs.asmx/getSuportCityString</arg>
+<arg>params=${params}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200525 11:26:41.417" level="INFO">GET Request : url=http://ws.webxml.com.cn/WebServices/WeatherWs.asmx/getSuportCityString?theRegionCode=3113 
+ path_url=/WebServices/WeatherWs.asmx/getSuportCityString?theRegionCode=3113 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20200525 11:26:41.417" level="INFO">GET Response : url=http://ws.webxml.com.cn/WebServices/WeatherWs.asmx/getSuportCityString?theRegionCode=3113 
+ status=500, reason=Internal Server Error 
+ body=getSuportCityString Web 服务方法名无效。
+ 
+ </msg>
+<msg timestamp="20200525 11:26:41.417" level="INFO">${resp} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20200525 11:26:41.120" endtime="20200525 11:26:41.417"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200525 11:26:41.417" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg timestamp="20200525 11:26:41.418" level="FAIL">500 != 200</msg>
+<status status="FAIL" starttime="20200525 11:26:41.417" endtime="20200525 11:26:41.418"></status>
+</kw>
+<doc>普通GET请求</doc>
+<status status="FAIL" starttime="20200525 11:26:41.119" endtime="20200525 11:26:41.418" critical="yes">500 != 200</status>
+</test>
+<test id="s1-t2" name="POST Requests">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>http://120.196.233.14:33200</arg>
+</arguments>
+<msg timestamp="20200525 11:26:41.418" level="INFO">Creating Session using : alias=api, url=http://120.196.233.14:33200, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200525 11:26:41.418" endtime="20200525 11:26:41.419"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20200525 11:26:41.419" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20200525 11:26:41.419" endtime="20200525 11:26:41.419"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>{"authenticateBasic": {"connectType": 1,"asDefaultProfile": 0,"userType": 3,"clientPasswd": "Huawei@123","authType": 0,"autoRegister": 0,"userID": "guestusr"},"authenticateTolerant": {"subnetID": "8602"},"authenticateDevice": {"deviceModel": "VR_glass"}}</arg>
+</arguments>
+<assign>
+<var>${json}</var>
+</assign>
+<msg timestamp="20200525 11:26:41.419" level="INFO">${json} = {"authenticateBasic": {"connectType": 1,"asDefaultProfile": 0,"userType": 3,"clientPasswd": "Huawei@123","authType": 0,"autoRegister": 0,"userID": "guestusr"},"authenticateTolerant": {"subnetID": "860...</msg>
+<status status="PASS" starttime="20200525 11:26:41.419" endtime="20200525 11:26:41.419"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>/VSP/V3/Authenticate</arg>
+<arg>header=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200525 11:26:41.517" level="INFO">POST Request : url=http://120.196.233.14:33200/VSP/V3/Authenticate 
+ path_url=/VSP/V3/Authenticate 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43'} 
+ body=b"header={'Content-Type': 'application/json'}" 
+ </msg>
+<msg timestamp="20200525 11:26:41.517" level="INFO">POST Response : url=http://120.196.233.14:33200/VSP/V3/Authenticate 
+ status=200, reason=OK 
+ body={"result":{"retCode":"125011002","retMsg":"ERR- 125011002: Deserialize error."}} 
+ </msg>
+<msg timestamp="20200525 11:26:41.518" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200525 11:26:41.419" endtime="20200525 11:26:41.518"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200525 11:26:41.518" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200525 11:26:41.518" endtime="20200525 11:26:41.518"></status>
+</kw>
+<doc>POST请求json</doc>
+<status status="PASS" starttime="20200525 11:26:41.418" endtime="20200525 11:26:41.518" critical="yes"></status>
+</test>
+<status status="FAIL" starttime="20200525 11:26:40.995" endtime="20200525 11:26:41.518"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1">Critical Tests</stat>
+<stat pass="1" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="1" id="s1" name="Api1">Api1</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

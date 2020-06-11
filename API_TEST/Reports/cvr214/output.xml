@@ -1,0 +1,2410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.7.4 on win32)" generated="20200610 15:02:14.148" rpa="false">
+<suite id="s1" name="Cvr214" source="D:\PycharmProjects\rf_auto\API_TEST\Tasks\cvr214.robot">
+<test id="s1-t1" name="biClientLoginoutReport_login">
+<kw name="biClientLoginoutReport_case" library="cvr214">
+<doc>客户端启动退出</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biClientLoginout_header}</arg>
+<arg>${Valid_biClientLoginout_body}</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:14.379" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:14.379" endtime="20200610 15:02:14.379"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biClientLoginoutReport}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:14.399" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biClientLoginout/report 
+ path_url=/biClient/biClientLoginout/report 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '495'} 
+ body=b'{"userId": "", "loginStatus": 0, "clientBrand": "\\u534e\\u4e3a", "clientModel": "\\u534e\\u4e3amate30", "clientImei": "123131", "androidVersion": "10.2.3", "mac": "AV:CA:83:48:29", "clientCpu": "8", "clientMemory": "16", "storage": "64", "networkType": 1, "operators": "\\u4e2d\\u56fd\\u79fb\\u52a8", "localIp": "192.168.1.202", "extranetIp": "116.46.56.202", "appId": "123456", "appPackage": "letinvr.gd.yuexiangwug", "appVersion": "5.3.2", "operation": 1, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:14.399" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biClientLoginout/report 
+ status=200, reason= 
+ body={"code":1000,"msg":"客户端启动信息采集成功!"} 
+ </msg>
+<msg timestamp="20200610 15:02:14.399" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:14.379" endtime="20200610 15:02:14.399"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:14.399" level="INFO">To JSON using : content={"code":1000,"msg":"客户端启动信息采集成功!"} </msg>
+<msg timestamp="20200610 15:02:14.399" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:14.399" level="INFO">${respjson} = {'code': 1000, 'msg': '客户端启动信息采集成功!'}</msg>
+<status status="PASS" starttime="20200610 15:02:14.399" endtime="20200610 15:02:14.399"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:14.400" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:14.399" endtime="20200610 15:02:14.400"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:14.400" level="INFO">url=http://192.168.1.171:8888/biClient/biClientLoginout/report</msg>
+<msg timestamp="20200610 15:02:14.400" level="INFO">body={'userId': '', 'loginStatus': 0, 'clientBrand': '华为', 'clientModel': '华为mate30', 'clientImei': '123131', 'androidVersion': '10.2.3', 'mac': 'AV:CA:83:48:29', 'clientCpu': '8', 'clientMemory': '16', 'storage': '64', 'networkType': 1, 'operators': '中国移动', 'localIp': '192.168.1.202', 'extranetIp': '116.46.56.202', 'appId': '123456', 'appPackage': 'letinvr.gd.yuexiangwug', 'appVersion': '5.3.2', 'operation': 1, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:14.400" level="INFO">respon={'code': 1000, 'msg': '客户端启动信息采集成功!'}</msg>
+<status status="PASS" starttime="20200610 15:02:14.400" endtime="20200610 15:02:14.400"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>1000</arg>
+</arguments>
+<msg timestamp="20200610 15:02:14.400" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:14.400" endtime="20200610 15:02:14.400"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.378" endtime="20200610 15:02:14.401"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.378" endtime="20200610 15:02:14.401" critical="yes"></status>
+</test>
+<test id="s1-t2" name="biHeartclientUserHeart_case">
+<kw name="${n} IN RANGE [ 16 ]" type="for">
+<kw name="${n} = 0" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:14.401" endtime="20200610 15:02:14.402"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:17.404" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:14.402" endtime="20200610 15:02:17.404"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:17.404" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:17.404" endtime="20200610 15:02:17.404"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:17.417" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:17.418" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:17.418" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:17.405" endtime="20200610 15:02:17.418"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:17.418" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:17.418" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:17.418" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:17.418" endtime="20200610 15:02:17.418"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:17.419" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:17.418" endtime="20200610 15:02:17.419"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:17.419" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:17.419" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:17.419" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:17.419" endtime="20200610 15:02:17.419"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:17.419" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:17.419" endtime="20200610 15:02:17.419"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.402" endtime="20200610 15:02:17.419"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.402" endtime="20200610 15:02:17.419"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.401" endtime="20200610 15:02:17.420"></status>
+</kw>
+<kw name="${n} = 1" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:17.420" endtime="20200610 15:02:17.420"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:20.423" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:17.421" endtime="20200610 15:02:20.423"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:20.423" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:20.423" endtime="20200610 15:02:20.423"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:20.436" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:20.437" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:20.437" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:20.424" endtime="20200610 15:02:20.437"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:20.437" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:20.437" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:20.437" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:20.437" endtime="20200610 15:02:20.437"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:20.437" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:20.437" endtime="20200610 15:02:20.437"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:20.438" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:20.438" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:20.438" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:20.437" endtime="20200610 15:02:20.438"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:20.438" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:20.438" endtime="20200610 15:02:20.438"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:17.420" endtime="20200610 15:02:20.438"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:17.420" endtime="20200610 15:02:20.438"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:17.420" endtime="20200610 15:02:20.438"></status>
+</kw>
+<kw name="${n} = 2" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:20.439" endtime="20200610 15:02:20.439"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:23.441" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:20.439" endtime="20200610 15:02:23.441"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:23.442" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:23.441" endtime="20200610 15:02:23.442"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:23.473" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:23.473" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:23.473" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:23.442" endtime="20200610 15:02:23.473"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:23.473" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:23.473" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:23.474" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:23.473" endtime="20200610 15:02:23.474"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:23.474" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:23.474" endtime="20200610 15:02:23.474"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:23.474" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:23.474" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:23.474" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:23.474" endtime="20200610 15:02:23.474"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:23.475" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:23.474" endtime="20200610 15:02:23.475"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:20.439" endtime="20200610 15:02:23.475"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:20.439" endtime="20200610 15:02:23.475"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:20.438" endtime="20200610 15:02:23.475"></status>
+</kw>
+<kw name="${n} = 3" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:23.475" endtime="20200610 15:02:23.475"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:26.477" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:23.476" endtime="20200610 15:02:26.477"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:26.477" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:26.477" endtime="20200610 15:02:26.477"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:26.501" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:26.501" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:26.501" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:26.477" endtime="20200610 15:02:26.501"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:26.501" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:26.501" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:26.501" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:26.501" endtime="20200610 15:02:26.501"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:26.502" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:26.501" endtime="20200610 15:02:26.502"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:26.502" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:26.502" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:26.502" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:26.502" endtime="20200610 15:02:26.502"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:26.502" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:26.502" endtime="20200610 15:02:26.502"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:23.476" endtime="20200610 15:02:26.503"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:23.475" endtime="20200610 15:02:26.503"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:23.475" endtime="20200610 15:02:26.503"></status>
+</kw>
+<kw name="${n} = 4" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:26.503" endtime="20200610 15:02:26.503"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:29.506" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:26.504" endtime="20200610 15:02:29.506"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:29.506" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:29.506" endtime="20200610 15:02:29.506"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:29.522" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:29.522" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:29.522" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:29.506" endtime="20200610 15:02:29.522"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:29.522" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:29.522" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:29.522" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:29.522" endtime="20200610 15:02:29.522"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:29.523" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:29.523" endtime="20200610 15:02:29.523"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:29.523" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:29.523" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:29.523" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:29.523" endtime="20200610 15:02:29.523"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:29.523" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:29.523" endtime="20200610 15:02:29.524"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:26.503" endtime="20200610 15:02:29.524"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:26.503" endtime="20200610 15:02:29.524"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:26.503" endtime="20200610 15:02:29.524"></status>
+</kw>
+<kw name="${n} = 5" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:29.524" endtime="20200610 15:02:29.524"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:32.526" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:29.525" endtime="20200610 15:02:32.526"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:32.526" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:32.526" endtime="20200610 15:02:32.526"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:32.542" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:32.542" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:32.542" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:32.526" endtime="20200610 15:02:32.542"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:32.542" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:32.542" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:32.542" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:32.542" endtime="20200610 15:02:32.542"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:32.543" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:32.542" endtime="20200610 15:02:32.543"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:32.543" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:32.543" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:32.543" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:32.543" endtime="20200610 15:02:32.543"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:32.543" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:32.543" endtime="20200610 15:02:32.543"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:29.524" endtime="20200610 15:02:32.544"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:29.524" endtime="20200610 15:02:32.544"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:29.524" endtime="20200610 15:02:32.544"></status>
+</kw>
+<kw name="${n} = 6" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:32.544" endtime="20200610 15:02:32.544"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:35.547" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:32.545" endtime="20200610 15:02:35.547"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:35.547" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:35.547" endtime="20200610 15:02:35.548"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:35.561" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:35.561" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:35.561" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:35.548" endtime="20200610 15:02:35.561"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:35.562" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:35.562" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:35.562" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:35.561" endtime="20200610 15:02:35.562"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:35.562" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:35.562" endtime="20200610 15:02:35.562"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:35.562" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:35.562" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:35.562" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:35.562" endtime="20200610 15:02:35.563"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:35.563" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:35.563" endtime="20200610 15:02:35.563"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:32.544" endtime="20200610 15:02:35.563"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:32.544" endtime="20200610 15:02:35.563"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:32.544" endtime="20200610 15:02:35.563"></status>
+</kw>
+<kw name="${n} = 7" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:35.563" endtime="20200610 15:02:35.563"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:38.565" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:35.564" endtime="20200610 15:02:38.565"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:38.565" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:38.565" endtime="20200610 15:02:38.565"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:38.580" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:38.580" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:38.580" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:38.565" endtime="20200610 15:02:38.580"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:38.580" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:38.581" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:38.581" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:38.580" endtime="20200610 15:02:38.581"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:38.581" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:38.581" endtime="20200610 15:02:38.581"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:38.581" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:38.581" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:38.581" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:38.581" endtime="20200610 15:02:38.581"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:38.582" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:38.582" endtime="20200610 15:02:38.582"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:35.564" endtime="20200610 15:02:38.582"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:35.563" endtime="20200610 15:02:38.582"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:35.563" endtime="20200610 15:02:38.582"></status>
+</kw>
+<kw name="${n} = 8" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:38.582" endtime="20200610 15:02:38.582"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:41.585" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:38.583" endtime="20200610 15:02:41.585"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:41.585" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:41.585" endtime="20200610 15:02:41.585"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:41.605" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:41.605" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:41.605" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:41.585" endtime="20200610 15:02:41.605"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:41.605" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:41.605" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:41.606" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:41.605" endtime="20200610 15:02:41.606"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:41.606" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:41.606" endtime="20200610 15:02:41.606"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:41.606" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:41.606" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:41.606" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:41.606" endtime="20200610 15:02:41.606"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:41.607" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:41.606" endtime="20200610 15:02:41.607"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:38.583" endtime="20200610 15:02:41.607"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:38.583" endtime="20200610 15:02:41.607"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:38.582" endtime="20200610 15:02:41.607"></status>
+</kw>
+<kw name="${n} = 9" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:41.607" endtime="20200610 15:02:41.607"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:44.609" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:41.608" endtime="20200610 15:02:44.609"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:44.609" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:44.609" endtime="20200610 15:02:44.610"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:44.622" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:44.622" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:44.622" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:44.610" endtime="20200610 15:02:44.622"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:44.623" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:44.623" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:44.623" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:44.622" endtime="20200610 15:02:44.623"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:44.623" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:44.623" endtime="20200610 15:02:44.623"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:44.623" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:44.623" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:44.623" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:44.623" endtime="20200610 15:02:44.623"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:44.624" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:44.623" endtime="20200610 15:02:44.624"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:41.608" endtime="20200610 15:02:44.624"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:41.607" endtime="20200610 15:02:44.624"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:41.607" endtime="20200610 15:02:44.624"></status>
+</kw>
+<kw name="${n} = 10" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:44.624" endtime="20200610 15:02:44.624"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:47.626" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:44.625" endtime="20200610 15:02:47.626"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:47.627" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:47.627" endtime="20200610 15:02:47.627"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:47.652" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:47.652" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:47.652" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:47.627" endtime="20200610 15:02:47.652"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:47.652" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:47.653" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:47.653" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:47.652" endtime="20200610 15:02:47.653"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:47.653" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:47.653" endtime="20200610 15:02:47.653"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:47.653" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:47.653" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:47.653" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:47.653" endtime="20200610 15:02:47.653"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:47.654" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:47.653" endtime="20200610 15:02:47.654"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:44.625" endtime="20200610 15:02:47.654"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:44.624" endtime="20200610 15:02:47.654"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:44.624" endtime="20200610 15:02:47.654"></status>
+</kw>
+<kw name="${n} = 11" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:47.654" endtime="20200610 15:02:47.654"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:50.656" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:47.655" endtime="20200610 15:02:50.656"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:50.656" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:50.656" endtime="20200610 15:02:50.656"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:50.670" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:50.670" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:50.670" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:50.656" endtime="20200610 15:02:50.670"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:50.670" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:50.670" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:50.670" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:50.670" endtime="20200610 15:02:50.670"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:50.671" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:50.671" endtime="20200610 15:02:50.671"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:50.671" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:50.671" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:50.671" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:50.671" endtime="20200610 15:02:50.671"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:50.671" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:50.671" endtime="20200610 15:02:50.672"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:47.655" endtime="20200610 15:02:50.672"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:47.654" endtime="20200610 15:02:50.672"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:47.654" endtime="20200610 15:02:50.672"></status>
+</kw>
+<kw name="${n} = 12" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:50.672" endtime="20200610 15:02:50.672"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:53.673" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:50.673" endtime="20200610 15:02:53.673"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:53.673" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:53.673" endtime="20200610 15:02:53.673"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:53.687" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:53.687" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:53.687" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:53.673" endtime="20200610 15:02:53.687"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:53.687" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:53.687" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:53.688" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:53.687" endtime="20200610 15:02:53.688"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:53.688" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:53.688" endtime="20200610 15:02:53.688"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:53.688" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:53.688" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:53.688" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:53.688" endtime="20200610 15:02:53.688"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:53.689" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:53.688" endtime="20200610 15:02:53.689"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:50.672" endtime="20200610 15:02:53.689"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:50.672" endtime="20200610 15:02:53.689"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:50.672" endtime="20200610 15:02:53.689"></status>
+</kw>
+<kw name="${n} = 13" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:53.689" endtime="20200610 15:02:53.689"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:56.691" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:53.690" endtime="20200610 15:02:56.691"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:56.691" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:56.691" endtime="20200610 15:02:56.691"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:56.705" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:56.705" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:56.705" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:56.691" endtime="20200610 15:02:56.705"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:56.705" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:56.706" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:56.706" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:56.705" endtime="20200610 15:02:56.706"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:56.706" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:56.706" endtime="20200610 15:02:56.706"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:56.706" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:56.706" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:56.706" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:56.706" endtime="20200610 15:02:56.706"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:56.707" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:56.707" endtime="20200610 15:02:56.707"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:53.690" endtime="20200610 15:02:56.707"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:53.689" endtime="20200610 15:02:56.707"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:53.689" endtime="20200610 15:02:56.707"></status>
+</kw>
+<kw name="${n} = 14" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:56.707" endtime="20200610 15:02:56.707"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:02:59.708" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:56.708" endtime="20200610 15:02:59.708"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:59.708" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:02:59.708" endtime="20200610 15:02:59.708"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:02:59.724" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:02:59.724" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:02:59.724" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:59.708" endtime="20200610 15:02:59.724"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:02:59.724" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:02:59.724" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:02:59.724" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:59.724" endtime="20200610 15:02:59.724"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:02:59.725" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:02:59.724" endtime="20200610 15:02:59.725"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:59.725" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:02:59.725" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:02:59.725" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:02:59.725" endtime="20200610 15:02:59.725"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:02:59.725" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:02:59.725" endtime="20200610 15:02:59.725"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:56.708" endtime="20200610 15:02:59.726"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:56.707" endtime="20200610 15:02:59.726"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:56.707" endtime="20200610 15:02:59.726"></status>
+</kw>
+<kw name="${n} = 15" type="foritem">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>第${n+1}次发起心跳</arg>
+</arguments>
+<status status="PASS" starttime="20200610 15:02:59.726" endtime="20200610 15:02:59.726"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${n}&lt;=14</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>3</arg>
+<arg>ELSE</arg>
+<arg>biHeartclientUserHeart_case</arg>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1000</arg>
+<arg>9</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.728" level="INFO">Slept 9 seconds</msg>
+<status status="PASS" starttime="20200610 15:02:59.727" endtime="20200610 15:03:08.728"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.728" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:03:08.728" endtime="20200610 15:03:08.729"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.749" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:03:08.749" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:03:08.749" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:03:08.729" endtime="20200610 15:03:08.749"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.750" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:03:08.750" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:03:08.750" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:03:08.749" endtime="20200610 15:03:08.750"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.750" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:03:08.750" endtime="20200610 15:03:08.750"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.750" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:03:08.750" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:03:08.750" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:03:08.750" endtime="20200610 15:03:08.750"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.751" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:03:08.750" endtime="20200610 15:03:08.751"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:59.726" endtime="20200610 15:03:08.751"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:59.726" endtime="20200610 15:03:08.751"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:59.726" endtime="20200610 15:03:08.751"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.401" endtime="20200610 15:03:08.751"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:02:14.401" endtime="20200610 15:03:08.751" critical="yes"></status>
+</test>
+<test id="s1-t3" name="biClientLoginoutReport_logout">
+<kw name="biClientLoginoutReport_case" library="cvr214">
+<doc>客户端启动退出</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biClientLoginout_header}</arg>
+<arg>${Valid_biClientLoginout_logout_body}</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.752" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:03:08.752" endtime="20200610 15:03:08.752"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biClientLoginoutReport}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.788" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biClientLoginout/report 
+ path_url=/biClient/biClientLoginout/report 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '495'} 
+ body=b'{"userId": "", "loginStatus": 0, "clientBrand": "\\u534e\\u4e3a", "clientModel": "\\u534e\\u4e3amate30", "clientImei": "123131", "androidVersion": "10.2.3", "mac": "AV:CA:83:48:29", "clientCpu": "8", "clientMemory": "16", "storage": "64", "networkType": 1, "operators": "\\u4e2d\\u56fd\\u79fb\\u52a8", "localIp": "192.168.1.202", "extranetIp": "116.46.56.202", "appId": "123456", "appPackage": "letinvr.gd.yuexiangwug", "appVersion": "5.3.2", "operation": 2, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:03:08.788" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biClientLoginout/report 
+ status=200, reason= 
+ body={"code":1000,"msg":"客户端退出信息采集成功!"} 
+ </msg>
+<msg timestamp="20200610 15:03:08.788" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:03:08.752" endtime="20200610 15:03:08.788"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.788" level="INFO">To JSON using : content={"code":1000,"msg":"客户端退出信息采集成功!"} </msg>
+<msg timestamp="20200610 15:03:08.788" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:03:08.788" level="INFO">${respjson} = {'code': 1000, 'msg': '客户端退出信息采集成功!'}</msg>
+<status status="PASS" starttime="20200610 15:03:08.788" endtime="20200610 15:03:08.789"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:03:08.789" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:03:08.789" endtime="20200610 15:03:08.789"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.789" level="INFO">url=http://192.168.1.171:8888/biClient/biClientLoginout/report</msg>
+<msg timestamp="20200610 15:03:08.789" level="INFO">body={'userId': '', 'loginStatus': 0, 'clientBrand': '华为', 'clientModel': '华为mate30', 'clientImei': '123131', 'androidVersion': '10.2.3', 'mac': 'AV:CA:83:48:29', 'clientCpu': '8', 'clientMemory': '16', 'storage': '64', 'networkType': 1, 'operators': '中国移动', 'localIp': '192.168.1.202', 'extranetIp': '116.46.56.202', 'appId': '123456', 'appPackage': 'letinvr.gd.yuexiangwug', 'appVersion': '5.3.2', 'operation': 2, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:03:08.789" level="INFO">respon={'code': 1000, 'msg': '客户端退出信息采集成功!'}</msg>
+<status status="PASS" starttime="20200610 15:03:08.789" endtime="20200610 15:03:08.789"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>1000</arg>
+</arguments>
+<msg timestamp="20200610 15:03:08.790" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200610 15:03:08.789" endtime="20200610 15:03:08.790"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:03:08.751" endtime="20200610 15:03:08.790"></status>
+</kw>
+<status status="PASS" starttime="20200610 15:03:08.751" endtime="20200610 15:03:08.790" critical="yes"></status>
+</test>
+<test id="s1-t4" name="biHeartclientUserHeart_heartinvalid">
+<kw name="biHeartclientUserHeart_case" library="cvr214">
+<doc>客户端启动退出心跳</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biHeartclientUserHeart_header}</arg>
+<arg>${Valid_biHeartclientUserHeart_body}</arg>
+<arg>1001</arg>
+<arg>3</arg>
+</arguments>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>${sleep}s</arg>
+</arguments>
+<msg timestamp="20200610 15:03:11.792" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20200610 15:03:08.791" endtime="20200610 15:03:11.792"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>${domain_test}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:11.792" level="INFO">Creating Session using : alias=api, url=http://192.168.1.171:8888, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200610 15:03:11.792" endtime="20200610 15:03:11.792"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${biHeartclientUserHeart}[path]</arg>
+<arg>headers=${header}</arg>
+<arg>json=${json}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200610 15:03:11.807" level="INFO">POST Request : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ path_url=/biClient/biHeart/clientUserHeart 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"mac": "AV:CA:83:48:29", "biTimeInterval": 3, "businessFlowNumber": "503d0092aae811ea909"}' 
+ </msg>
+<msg timestamp="20200610 15:03:11.807" level="INFO">POST Response : url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart 
+ status=200, reason= 
+ body={"code":1000,"msg":"心跳正常"} 
+ </msg>
+<msg timestamp="20200610 15:03:11.807" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200610 15:03:11.792" endtime="20200610 15:03:11.807"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${resp.content}</arg>
+</arguments>
+<assign>
+<var>${respjson}</var>
+</assign>
+<msg timestamp="20200610 15:03:11.807" level="INFO">To JSON using : content={"code":1000,"msg":"心跳正常"} </msg>
+<msg timestamp="20200610 15:03:11.808" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200610 15:03:11.808" level="INFO">${respjson} = {'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:03:11.807" endtime="20200610 15:03:11.808"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${respjson}</arg>
+<arg>code</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20200610 15:03:11.808" level="INFO">${code} = 1000</msg>
+<status status="PASS" starttime="20200610 15:03:11.808" endtime="20200610 15:03:11.808"></status>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>url=${resp.url}</arg>
+<arg>body=${json}</arg>
+<arg>respon=${respjson}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:11.808" level="INFO">url=http://192.168.1.171:8888/biClient/biHeart/clientUserHeart</msg>
+<msg timestamp="20200610 15:03:11.808" level="INFO">body={'mac': 'AV:CA:83:48:29', 'biTimeInterval': 3, 'businessFlowNumber': '503d0092aae811ea909'}</msg>
+<msg timestamp="20200610 15:03:11.808" level="INFO">respon={'code': 1000, 'msg': '心跳正常'}</msg>
+<status status="PASS" starttime="20200610 15:03:11.808" endtime="20200610 15:03:11.809"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${assert}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:11.809" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg timestamp="20200610 15:03:11.809" level="FAIL">1000 != 1001</msg>
+<status status="FAIL" starttime="20200610 15:03:11.809" endtime="20200610 15:03:11.809"></status>
+</kw>
+<status status="FAIL" starttime="20200610 15:03:08.790" endtime="20200610 15:03:11.810"></status>
+</kw>
+<status status="FAIL" starttime="20200610 15:03:08.790" endtime="20200610 15:03:11.810" critical="yes">1000 != 1001</status>
+</test>
+<test id="s1-t5" name="biVideoOperationReport_valid">
+<kw name="biVideoOperationReport_case" library="cvr214">
+<doc>播放视频信息上报</doc>
+<arguments>
+<arg>${domain_test}</arg>
+<arg>${Valid_biClientLoginout_header}</arg>
+<arg>${biVideoOperationReport_valid}</arg>
+</arguments>
+<msg timestamp="20200610 15:03:11.811" level="FAIL">Variable '${biVideoOperationReport_valid}' not found. Did you mean:
+    ${biVideoOperationReport}</msg>
+<status status="FAIL" starttime="20200610 15:03:11.810" endtime="20200610 15:03:11.811"></status>
+</kw>
+<status status="FAIL" starttime="20200610 15:03:11.810" endtime="20200610 15:03:11.811" critical="yes">Variable '${biVideoOperationReport_valid}' not found. Did you mean:
+    ${biVideoOperationReport}</status>
+</test>
+<status status="FAIL" starttime="20200610 15:02:14.149" endtime="20200610 15:03:11.812"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="2">Critical Tests</stat>
+<stat pass="3" fail="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="2" id="s1" name="Cvr214">Cvr214</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
